@@ -3,5 +3,4 @@
   <h1>2B Lang</h1>
 </div>
 
-### Simple compiled programming language just because I want to ┐(‘～` )┌
 ### Readme is a big wip (o^^o)
