@@ -8,4 +8,5 @@ project(2BCompiler C)
 add_executable(
     2bc
     src/Ayanami.c
+    src/lexer.c
 )

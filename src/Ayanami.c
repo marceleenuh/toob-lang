@@ -1,5 +1,11 @@
+#include "include/lexer.h"
+
 #include <stdio.h>
 #include <stdlib.h>
+
+void printUsage(char** argv) {
+    printf("Usage: %s <path_to_target_file>\n", argv[0]);
+}
 
 long fileSize(FILE* file) {
     fseek(file, 0, SEEK_END);
@@ -14,24 +20,22 @@ char* fileContents(char* path) {
         printf("Error while opening %s\n", path);
         return NULL;
     }
+
     long size = fileSize(file);
     if (size == 0) {
         return NULL;
     }
+
     char* contents = malloc(size + 1);
     size_t bytesRead = fread(contents, 1, size, file);
     if (bytesRead != size) {
         free(contents);
         return NULL;
     }
-    
+
     // Make sure to null-terminate the file contents so that we don't get any string-related issues.
     contents[size] = '\0';
     return contents;
-}
-
-void printUsage(char** argv) {
-    printf("Usage: %s <path_to_target_file>\n", argv[0]);
 }
 
 int main(int argc, char** argv) {
@@ -42,5 +46,5 @@ int main(int argc, char** argv) {
 
     char* filepath = argv[1];
     char* contents = fileContents(filepath);
-    printf("%s\n", contents);
+    lex(contents);
 }
