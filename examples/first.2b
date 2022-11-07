@@ -1,7 +1,6 @@
 // Comment
 
-a: int;         // Variable declaration
-a = 5;          // Variable Assignment
+a: int = 5;         // Variable declaration
 a = 8;          // Variable Reassignment
 
 func foo (a: int, b: int): int {

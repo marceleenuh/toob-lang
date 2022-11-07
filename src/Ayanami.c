@@ -46,5 +46,5 @@ int main(int argc, char** argv) {
 
     char* filepath = argv[1];
     char* contents = fileContents(filepath);
-    lex(contents);
+    // lex(contents);
 }
