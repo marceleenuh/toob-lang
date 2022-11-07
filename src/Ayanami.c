@@ -18,8 +18,6 @@ int main(int argc, char** argv) {
     char* filepath = argv[1];
     char* contents = fileContents(filepath);
 
-
-
-    Error err = lex(NULL, NULL, NULL);
+    Error err = parseExpression(contents);
     printError(err);
 }
