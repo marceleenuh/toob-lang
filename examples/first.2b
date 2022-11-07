@@ -1,8 +1,6 @@
-// Comment
-
-a: int;          // Variable declaration
-a = 5;           // Variable Assignment
-a = 8;           // Variable Reassignment
+a: int;
+a = 5;
+a = 8;
 
 func foo(a: int, b: int) -> int {
     return a + b;

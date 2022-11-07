@@ -17,7 +17,11 @@ int main(int argc, char** argv) {
 
     char* filepath = argv[1];
     char* contents = fileContents(filepath);
+    if (contents) {
+        Error err = parseExpression(contents);
+        printError(err);
+        
+        free(contents);
+    }
 
-    Error err = parseExpression(contents);
-    printError(err);
 }
