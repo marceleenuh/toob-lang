@@ -4,6 +4,6 @@
 </div>
 
 ### Example
-https://github.com/AMEXif/2b-lang/blob/9a472f0c8b4c2ac0312070661cbf30f3a0e989ea/examples/first.2b#L1-L9
+https://github.com/AMEXif/2b-lang/blob/62ed7ac98721e70b51473d6cd05bfc520f47344e/examples/first.2b#L1-L7
 
 ### Readme is a big wip (o^^o)
