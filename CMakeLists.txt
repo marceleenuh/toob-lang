@@ -10,5 +10,6 @@ add_executable(
     src/Ayanami.c
     src/lexer.c
     src/error.c
+    src/fileIO.c
     )
 target_include_directories(2bc PRIVATE ${INCLUDE_DIR})
