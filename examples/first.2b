@@ -3,6 +3,6 @@
 a: int = 5;         // Variable declaration
 a = 8;          // Variable Reassignment
 
-func foo (a: int, b: int): int {
+func foo(a: int, b: int): int {
     return a + b;
 }

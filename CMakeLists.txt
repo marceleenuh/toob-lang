@@ -9,4 +9,6 @@ add_executable(
     2bc
     src/Ayanami.c
     src/lexer.c
-)
+    src/error.c
+    )
+target_include_directories(2bc PRIVATE ${INCLUDE_DIR})

@@ -1,4 +1,5 @@
-#include "include/lexer.h"
+#include "lexer.h"
+#include "error.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,5 +47,7 @@ int main(int argc, char** argv) {
 
     char* filepath = argv[1];
     char* contents = fileContents(filepath);
-    // lex(contents);
+
+    Error err = lex(NULL, NULL, NULL);
+    printError(err);
 }
