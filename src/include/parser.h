@@ -3,6 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// Thanks Lens_r
+// Pretty much Lens_r's code
 Error lex(char* src, char** beg, char** end);
 Error parseExpression(char* src);

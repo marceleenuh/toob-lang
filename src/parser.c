@@ -2,20 +2,24 @@
 
 Error ok = { ERROR_NONE, "ok"};
 
-// Thanks Lens_r
-const char* whitespace = " ;\r\n";
-const char* delimiters = ";\r";
+// Pretty much Lens_r's code
+const char* whitespace = " \r\n;";
+const char* delimiters = ";\r\n,():";
 
 Error lex(char* src, char** beg, char** end) {
     Error err = ok;
     if (!src || !beg || !end) { 
-        CREATE_ERROR(err, ERROR_ARGS, "Cannot lex an empty source.");
+        CREATE_ERROR(err, ERROR_ARGS, "Can't lex an empty source.");
         return err;
     }
     *beg = src;
     *beg += strspn(*beg, whitespace);
     *end = *beg;
+    if (**end == '\0') { return err; }
     *end += strcspn(*beg, delimiters);
+    if (*end == *beg) {
+        *end += 1;
+    }
     return ok;
 }
 
