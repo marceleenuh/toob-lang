@@ -1,4 +1,4 @@
-#include "lexer.h"
+#include "parser.h"
 
 Error ok = { ERROR_NONE, "ok"};
 
