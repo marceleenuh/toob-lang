@@ -1,4 +1,4 @@
-#include "lexer.h"
+#include "parser.h"
 #include "error.h"
 #include "fileIO.h"
 
@@ -17,6 +17,8 @@ int main(int argc, char** argv) {
 
     char* filepath = argv[1];
     char* contents = fileContents(filepath);
+
+
 
     Error err = lex(NULL, NULL, NULL);
     printError(err);

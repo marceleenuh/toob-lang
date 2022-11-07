@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.22)
 
 set(INCLUDE_DIR src/include)
 set(CMAKE_EXPORT_COMPILE_COMANDS on)
@@ -8,7 +8,7 @@ project(2BCompiler C)
 add_executable(
     2bc
     src/Ayanami.c
-    src/lexer.c
+    src/parser.c
     src/error.c
     src/fileIO.c
     )
