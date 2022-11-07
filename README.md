@@ -3,6 +3,11 @@
   <h1>TooB Lang</h1>
 </div>
 
+### How to Build
+1. Create a build directory in the repo folder. `$ mkdir build`
+2. Move to the build dir, run CMake and Make to compile. `$ cd build && cmake .. && make`
+3. Run with: `$ ./2bc <path_to_target_file>`
+
 ### Example
 https://github.com/AMEXif/toob-lang/blob/62ed7ac98721e70b51473d6cd05bfc520f47344e/examples/first.2b#L1-L7
 
