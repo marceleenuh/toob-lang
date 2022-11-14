@@ -4,5 +4,12 @@
 #include <string.h>
 
 // Pretty much Lens_r's code
-Error lex(char* src, char** beg, char** end);
+typedef struct Token {
+    char* beginning;
+    char* end;
+    struct Token* next;
+} Token;
+
+Error lex(char* src, Token* token);
 Error parseExpression(char* src);
+Token createLexableToken(char* src);
