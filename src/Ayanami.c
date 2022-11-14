@@ -1,6 +1,7 @@
 #include "parser.h"
 #include "error.h"
 #include "fileIO.h"
+#include "AST.h"
 
 #include <stdio.h>
 #include <stdlib.h>
