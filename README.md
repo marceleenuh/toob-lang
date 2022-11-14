@@ -9,6 +9,6 @@
 3. Run with: `$ ./2bc <path_to_target_file>`
 
 ### Example
-https://github.com/AMEXif/toob-lang/blob/62ed7ac98721e70b51473d6cd05bfc520f47344e/examples/first.2b#L1-L7
+https://github.com/AMEXif/toob-lang/blob/eaddaa4c27cb02cb946381dd366a866f6c0252c1/examples/first.2b#L1-L7
 
 ### Readme is a big wip (o^^o)
