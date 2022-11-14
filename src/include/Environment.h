@@ -8,7 +8,7 @@ typedef struct Node {
         NODE_TYPE_INT,
     } type;
     union NodeValue {
-		toobInt = toobInt;
+		toobInt toobInt;
     } value;
 
 	struct Node** children;

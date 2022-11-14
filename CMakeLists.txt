@@ -13,6 +13,6 @@ add_executable(
     src/parser.c
     src/error.c
     src/fileIO.c
-    src/AST.c
+    src/Environment.c
 )
 target_include_directories(2bc PRIVATE ${INCLUDE_DIR})
