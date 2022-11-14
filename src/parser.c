@@ -11,8 +11,8 @@ Token createLexableToken(char* src) {
 }
 
 // Pretty much Lens_r's code
-const char* whitespace = " \r\n;";
-const char* delimiters = ";\r\n,():";
+const char* whitespace = " ;\r\n";
+const char* delimiters = " ;\r\n,(){}:=";
 
 Error lex(char* src, Token* token) {
     Error err = ok;
