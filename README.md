@@ -5,8 +5,8 @@
 
 ### How to Build
 1. Create a build directory in the repo folder. `$ mkdir build`
-2. Move to the build dir, run CMake and Make to compile. `$ cd build && cmake .. && make`
-3. Run with: `$ ./2bc <path_to_target_file>`
+2. Configure CMake in ./build and set build type to Release `$ cmake -B ./build -DCMAKE_BUILD_TYPE=Release`
+3. Run with: `$ ./build/2bc <path_to_target_file>`
 
 ### Example
 
