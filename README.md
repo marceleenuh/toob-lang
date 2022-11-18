@@ -5,10 +5,12 @@
 
 ### How to Build
 1. Create a build directory in the repo folder. `$ mkdir build`
-2. Move to the build dir, run CMake and Make to compile. `$ cd build && cmake .. && make`
-3. Run with: `$ ./2bc <path_to_target_file>`
+2. Configure CMake in ./build and set build type to Release `$ cmake -B ./build -DCMAKE_BUILD_TYPE=Release`
+3. Build `$ cmake --build ./build --config Release`
+4. Run with: `$ ./build/2bc <path_to_target_file>`
 
 ### Example
-https://github.com/AMEXif/toob-lang/blob/eaddaa4c27cb02cb946381dd366a866f6c0252c1/examples/first.2b#L1-L7
+
+https://github.com/marceleenuh/toob-lang/blob/cb8d17cbb05c778b0e19e37dc696ba7de5661405/examples/first.2b#L1-L7
 
 ### Readme is a big wip (o^^o)
