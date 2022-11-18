@@ -1,5 +1,6 @@
 #pragma once
 #include "error.h"
+#include "Environment.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

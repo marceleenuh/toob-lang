@@ -28,6 +28,7 @@ Error lex(char* src, Token* token) {
         CREATE_ERROR(err, ERROR_ARGS, "Can't lex an empty source.");
         return err;
     }
+
     token->beginning = src;
     token->beginning += strspn(token->beginning, whitespace);
     token->end = token->beginning;
