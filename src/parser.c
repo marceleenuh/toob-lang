@@ -5,6 +5,7 @@ Error ok = { ERROR_NONE, "ok"};
 Token* createToken() {
     Token* token = malloc(sizeof(Token));
     assert(token && "Couldn't allocate memory for token");
+    memset(token, 0, sizeof(Token));
     return token;
 }
 
