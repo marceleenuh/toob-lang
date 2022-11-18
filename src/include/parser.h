@@ -1,7 +1,9 @@
 #pragma once
 #include "error.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 // Pretty much Lens_r's code
 typedef struct Token {
@@ -12,4 +14,5 @@ typedef struct Token {
 
 Error lex(char* src, Token* token);
 Error parseExpression(char* src);
-Token createLexableToken(char* src);
+Token* createToken();
+Token* createLexableToken(char* src);

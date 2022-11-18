@@ -2,12 +2,19 @@
 
 Error ok = { ERROR_NONE, "ok"};
 
-Token createLexableToken(char* src) {
-    Token r;
-    r.next = NULL;
-    r.beginning = src;
-    r.end = src;
-    return r;
+Token* createToken() {
+    Token* token = malloc(sizeof(Token));
+    assert(token && "Couldn't allocate memory for token");
+    return token;
+}
+
+Token* createLexableToken(char* src) {
+    Token* token = createToken();
+    assert(token && "Couldn't create token");
+    token->next = NULL;
+    token->beginning = src;
+    token->end = src;
+    return token;
 }
 
 // Pretty much Lens_r's code
@@ -24,6 +31,7 @@ Error lex(char* src, Token* token) {
     token->beginning += strspn(token->beginning, whitespace);
     token->end = token->beginning;
     if (*(token->end) == '\0') { return err; }
+
     token->end += strcspn(token->beginning, delimiters);
     if (token->end == token->beginning) {
         token->end += 1;
@@ -32,12 +40,11 @@ Error lex(char* src, Token* token) {
 }
 
 Error parseExpression(char* src) {
-    Token token = createLexableToken(src);
+    Token* token = createLexableToken(src);
     Error err = ok;
-
-    while ((err = lex(token.end, &token)).type == ERROR_NONE) {
-        if (token.end - token.beginning == 0) { break; }
-        printf("Lexed: %.*s\n", token.end - token.beginning, token.beginning);
+    while ((err = lex(token->end, token)).type == ERROR_NONE) {
+        if (token->end - token->beginning == 0) { break; }
+        printf("Lexed: %.*s\n", (int)(token->end - token->beginning), token->beginning);
     }
     return err;
 }
