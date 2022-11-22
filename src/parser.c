@@ -2,6 +2,34 @@
 
 Error ok = { ERROR_NONE, "ok"};
 
+// Helper functions
+void printTokens(Token* tokens) {
+    size_t count = 0;
+    while (tokens) {
+        printf("Token #%lu: ", count);
+        if (tokens->beginning && tokens->end) {
+            printf("%.*s", tokens->end - tokens->beginning, tokens->beginning);
+        }
+        putchar('\n');
+        tokens = tokens->next;
+        count++;
+    }
+}
+
+void appendToken(Token** dest, Token src)
+{
+    Token* temp = createToken();
+    temp->beginning = src.beginning;
+    temp->end = src.end;
+    if (*dest) {
+        Token* lastToken = *dest;
+        while(lastToken->next) {
+            lastToken = lastToken->next;
+        }
+        lastToken->next = temp;
+    } else { *dest = temp; }
+}
+
 Token* createToken() {
     Token* token = malloc(sizeof(Token));
     assert(token && "Couldn't allocate memory for token");
@@ -10,8 +38,8 @@ Token* createToken() {
 }
 
 Token createLexableToken(char* src) {
-    Token* _token = createToken();
-    Token token = token;
+    Token token;
+
     token.next = NULL;
     token.beginning = src;
     token.end = src;
@@ -19,8 +47,8 @@ Token createLexableToken(char* src) {
 }
 
 // Pretty much Lens_r's code
-const char* whitespace = " ;\r\n";
-const char* delimiters = " ;\r\n,(){}:=";
+const char* whitespace = " \r\n";
+const char* delimiters = " \r\n;,(){}:=";
 
 Error lex(char* src, Token* token) {
     Error err = ok;
@@ -42,11 +70,16 @@ Error lex(char* src, Token* token) {
 }
 
 Error parseExpression(char* src, Node* result) {
-    Token token = createLexableToken(src);
     Error err = ok;
-    while ((err = lex(token.end, &token)).type == ERROR_NONE) {
-        if (token.end - token.beginning == 0) { break; }
-        printf("Lexed: %.*s\n", (int)(token.end - token.beginning), token.beginning);
+
+    Token* tokens = NULL;
+    Token currentToken = createLexableToken(src);
+
+    while ((err = lex(currentToken.end, &currentToken)).type == ERROR_NONE) {
+        if (currentToken.end - currentToken.beginning == 0) { break; }
+        appendToken(&tokens, currentToken);
     }
+
+    printTokens(tokens);
     return err;
 }
