@@ -14,6 +14,6 @@ typedef struct Token {
 } Token;
 
 Error lex(char* src, Token* token);
-Error parseExpression(char* src);
+Error parseExpression(char* src, Node* result);
 Token* createToken();
-Token* createLexableToken(char* src);
+Token createLexableToken(char* src);

@@ -1,6 +1,6 @@
 #pragma once
 
-typedef long long toobInt;
+typedef long long tInt;
 typedef struct Node {
     enum NodeType {
         NODE_TYPE_NONE = 0,
@@ -8,7 +8,7 @@ typedef struct Node {
         NODE_TYPE_INT,
     } type;
     union NodeValue {
-		toobInt toobInt;
+		tInt tInt;
     } value;
 
 	struct Node** children;

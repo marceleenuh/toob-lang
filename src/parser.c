@@ -9,12 +9,12 @@ Token* createToken() {
     return token;
 }
 
-Token* createLexableToken(char* src) {
-    Token* token = createToken();
-    assert(token && "Couldn't create token");
-    token->next = NULL;
-    token->beginning = src;
-    token->end = src;
+Token createLexableToken(char* src) {
+    Token* _token = createToken();
+    Token token = token;
+    token.next = NULL;
+    token.beginning = src;
+    token.end = src;
     return token;
 }
 
@@ -41,12 +41,12 @@ Error lex(char* src, Token* token) {
     return ok;
 }
 
-Error parseExpression(char* src) {
-    Token* token = createLexableToken(src);
+Error parseExpression(char* src, Node* result) {
+    Token token = createLexableToken(src);
     Error err = ok;
-    while ((err = lex(token->end, token)).type == ERROR_NONE) {
-        if (token->end - token->beginning == 0) { break; }
-        printf("Lexed: %.*s\n", (int)(token->end - token->beginning), token->beginning);
+    while ((err = lex(token.end, &token)).type == ERROR_NONE) {
+        if (token.end - token.beginning == 0) { break; }
+        printf("Lexed: %.*s\n", (int)(token.end - token.beginning), token.beginning);
     }
     return err;
 }
