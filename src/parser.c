@@ -16,6 +16,26 @@ void printTokens(Token* tokens) {
     }
 }
 
+void printArray(char** array) {
+    size_t length = 0;
+    char** arrayIt = array;
+    char* c = "";
+    while (c != '\0') {
+        c = array[length];
+        length++;
+    }
+    length -= 1;
+
+    putchar('{');
+    for (int i = 0; i < length; i++) {
+        if (i == length - 1){
+            printf(" '%s' }", array[i]);
+            break;
+        } else { printf(" '%s',", array[i]); }
+    }
+    putchar('\n');
+}
+
 void freeTokens(Token* tokens) {
     size_t count = 0;
     while (tokens) {
@@ -56,6 +76,7 @@ char** toTokenArray(Token* tokens) {
         tokenIt = tokenIt->next;
         count++;
     }
+    tokenArray[count] = '\0';
     return tokenArray;
 }
 
@@ -115,10 +136,11 @@ Error parseExpression(char* src, Node* result) {
         appendToken(&tokens, currentToken);
     }
 
-    //printTokens(tokens);
+    // printTokens(tokens);
     Node* rootNode = createNode();
     Token* tokenIt = tokens;
     char** tokenArray = toTokenArray(tokens);
+    printArray(tokenArray);
 
     while(tokenIt) {
         char* tokenContent = getTokenContent(tokenIt);

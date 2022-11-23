@@ -24,3 +24,4 @@ char* getTokenContent(Token* token);
 void appendToken(Token** dest, Token src);
 void freeTokens(Token* tokens);
 void printTokens(Token* tokens);
+void printArray(char** array);
