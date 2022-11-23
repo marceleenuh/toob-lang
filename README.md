@@ -3,6 +3,9 @@
   <h1>TooB Lang</h1>
 </div>
 
+### Notes
+Pronounced as [Too-Bee (2B)] or [Toob]
+
 ### How to Build
 1. Create a build directory in the repo folder. `$ mkdir build`
 2. Configure CMake in ./build and set build type to Release `$ cmake -B ./build -DCMAKE_BUILD_TYPE=Release`
