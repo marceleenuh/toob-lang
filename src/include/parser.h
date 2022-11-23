@@ -20,4 +20,5 @@ Error parseExpression(char* src, Node* result);
 Token* createToken();
 Token createLexableToken(char* src);
 void appendToken(Token** dest, Token src);
+void freeTokens(Token* tokens);
 void printTokens(Token* tokens);

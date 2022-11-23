@@ -4,9 +4,9 @@ Error ok = { ERROR_NONE, "ok"};
 
 // Helper functions
 void printTokens(Token* tokens) {
-    size_t count = 0;
+    size_t count = 1;
     while (tokens) {
-        printf("Token #%lu: ", count);
+        printf("Token #%02lu: ", count);
         if (tokens->beginning && tokens->end) {
             printf("%.*s", tokens->end - tokens->beginning, tokens->beginning);
         }
@@ -14,6 +14,17 @@ void printTokens(Token* tokens) {
         tokens = tokens->next;
         count++;
     }
+}
+
+void freeTokens(Token* tokens) {
+    size_t count = 0;
+    while (tokens) {
+        Token* temp = tokens;
+        tokens = tokens->next;
+        free(temp);
+        count++;
+    }
+    printf("Freed %lu tokens\n", count);
 }
 
 void appendToken(Token** dest, Token src)
@@ -31,9 +42,8 @@ void appendToken(Token** dest, Token src)
 }
 
 Token* createToken() {
-    Token* token = malloc(sizeof(Token));
+    Token* token = calloc(1, sizeof(Token));
     assert(token && "Couldn't allocate memory for token");
-    memset(token, 0, sizeof(Token));
     return token;
 }
 
@@ -81,5 +91,14 @@ Error parseExpression(char* src, Node* result) {
     }
 
     printTokens(tokens);
+
+    Node* rootNode = createNode();
+    Token* tokenIt = tokens;
+    
+    while(tokenIt) {
+        tokenIt = tokenIt->next;
+    }
+
+    freeTokens(tokens);
     return err;
 }

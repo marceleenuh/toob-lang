@@ -1,4 +1,5 @@
 #pragma once
+#include <assert.h>
 
 typedef long long tInt;
 typedef struct Node {
@@ -14,9 +15,9 @@ typedef struct Node {
 	struct Node** children;
 } Node;
 
-#define noneNode (node) ((node).type == NODE_TYPE_NONE)
-#define rootNode (node) ((node).type == NODE_TYPE_ROOT)
-#define intNode (node) ((node).type == NODE_TYPE_INT)
+#define nodeNone (node) ((node).type == NODE_TYPE_NONE)
+#define nodeRoot (node) ((node).type == NODE_TYPE_ROOT)
+#define nodeInt (node) ((node).type == NODE_TYPE_INT)
 
 typedef struct Binding {
     char* id;
@@ -29,3 +30,4 @@ typedef struct Scope {
 } Scope;
 
 void setScope();
+Node* createNode();
