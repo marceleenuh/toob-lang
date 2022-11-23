@@ -41,6 +41,32 @@ void appendToken(Token** dest, Token src)
     } else { *dest = temp; }
 }
 
+char** toTokenArray(Token* tokens) {
+    Token* tokenIt = tokens;
+    size_t count = 0;
+    while (tokenIt) {
+        tokenIt = tokenIt->next;
+        count++;
+    }
+    char** tokenArray = calloc(count, sizeof(char*));
+    tokenIt = tokens;
+    count = 0;
+    while (tokenIt) {
+        tokenArray[count] = getTokenContent(tokenIt);
+        tokenIt = tokenIt->next;
+        count++;
+    }
+    return tokenArray;
+}
+
+char* getTokenContent(Token* token) {
+    size_t tokenLength = token->end - token->beginning;
+    char* tokenContent = malloc(tokenLength + 1);
+    memcpy(tokenContent, token->beginning, tokenLength);
+    tokenContent[tokenLength] = '\0';
+    return tokenContent;
+}
+
 Token* createToken() {
     Token* token = calloc(1, sizeof(Token));
     assert(token && "Couldn't allocate memory for token");
@@ -49,7 +75,6 @@ Token* createToken() {
 
 Token createLexableToken(char* src) {
     Token token;
-
     token.next = NULL;
     token.beginning = src;
     token.end = src;
@@ -90,12 +115,22 @@ Error parseExpression(char* src, Node* result) {
         appendToken(&tokens, currentToken);
     }
 
-    printTokens(tokens);
-
+    //printTokens(tokens);
     Node* rootNode = createNode();
     Token* tokenIt = tokens;
-    
+    char** tokenArray = toTokenArray(tokens);
+
     while(tokenIt) {
+        char* tokenContent = getTokenContent(tokenIt);
+
+        if (strcmp(":", tokenContent) == 0) {  
+            if (tokenIt->next && strcmp("int", getTokenContent(tokenIt->next)) == 0) {
+                printf("Found int declaration\n");
+            } else if (tokenIt->next && strcmp("=", getTokenContent(tokenIt->next)) == 0) {
+                printf("Found variable assignment\n");
+            }
+        }
+
         tokenIt = tokenIt->next;
     }
 
