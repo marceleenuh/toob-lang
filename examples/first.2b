@@ -1,6 +1,6 @@
 a: int;
-a := 56;
-a := 8;
+a = 56;
+a = 8;
 
 func foo(a: int, b: int) {
     return a + b;

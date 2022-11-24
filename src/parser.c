@@ -44,7 +44,7 @@ void freeTokens(Token* tokens) {
         free(temp);
         count++;
     }
-    printf("Freed %lu tokens\n", count);
+    printf("\nFreed %lu tokens\n", count);
 }
 
 void appendToken(Token** dest, Token src)
@@ -102,6 +102,12 @@ Token createLexableToken(char* src) {
     return token;
 }
 
+bool consistsOf(char* str, char* accept) {
+    size_t length = strlen(str);
+    size_t span = strspn(str, accept);
+    return length == span;
+}
+
 // Pretty much Lens_r's code
 const char* whitespace = " \r\n";
 const char* delimiters = " \r\n;,(){}:=";
@@ -126,6 +132,7 @@ Error lex(char* src, Token* token) {
 }
 
 Error parseExpression(char* src, Node* result) {
+    char* alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     Error err = ok;
 
     Token* tokens = NULL;
@@ -140,16 +147,23 @@ Error parseExpression(char* src, Node* result) {
     Node* rootNode = createNode();
     Token* tokenIt = tokens;
     char** tokenArray = toTokenArray(tokens);
-    printArray(tokenArray);
+    // printArray(tokenArray);
 
     while(tokenIt) {
         char* tokenContent = getTokenContent(tokenIt);
+        char* nextTokenContent;
+        if (tokenIt->next)
+            nextTokenContent = getTokenContent(tokenIt->next);
 
         if (strcmp(":", tokenContent) == 0) {  
-            if (tokenIt->next && strcmp("int", getTokenContent(tokenIt->next)) == 0) {
+            if (nextTokenContent && strcmp("int", nextTokenContent) == 0) {
                 printf("Found int declaration\n");
-            } else if (tokenIt->next && strcmp("=", getTokenContent(tokenIt->next)) == 0) {
-                printf("Found variable assignment\n");
+            }
+        }
+
+        if (strcmp("=", tokenContent) == 0) {  
+            if (nextTokenContent && consistsOf(nextTokenContent, "0123456789")) {
+                printf("Found int assignment: %s\n", nextTokenContent);
             }
         }
 
