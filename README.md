@@ -14,6 +14,6 @@ Pronounced as [Too-Bee (2B)] or [Toob]
 
 ### Example
 
-https://github.com/marceleenuh/toob-lang/blob/b256d59f648ee3e21b133796b1d9bd29e939310e/examples/first.2b#L1-L7
+https://github.com/marceleenuh/toob-lang/blob/712eba0d28b16ce5875bbfcbbcef3f99f89eecfc/examples/first.2b#L1-L7
 
 ### Readme is a big wip (o^^o)
