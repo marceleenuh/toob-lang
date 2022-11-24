@@ -20,7 +20,7 @@ void printArray(char** array) {
     size_t length = 0;
     char** arrayIt = array;
     char* c = "";
-    while (c != '\0') {
+    while (*(c) != '\0') {
         c = array[length];
         length++;
     }
@@ -36,7 +36,7 @@ void printArray(char** array) {
     putchar('\n');
 }
 
-void freeTokens(Token* tokens) {
+size_t freeTokens(Token* tokens) {
     size_t count = 0;
     while (tokens) {
         Token* temp = tokens;
@@ -44,7 +44,7 @@ void freeTokens(Token* tokens) {
         free(temp);
         count++;
     }
-    printf("\nFreed %lu tokens\n", count);
+    return count;
 }
 
 void appendToken(Token** dest, Token src)
@@ -170,6 +170,7 @@ Error parseExpression(char* src, Node* result) {
         tokenIt = tokenIt->next;
     }
 
-    freeTokens(tokens);
+    printf("Freed %lu tokens\n", freeTokens(tokens));
+    printf("Freed %lu nodes\n", freeNode(rootNode));
     return err;
 }

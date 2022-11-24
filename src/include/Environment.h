@@ -1,6 +1,7 @@
 #pragma once
-#include <assert.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 typedef long long tInt;
 typedef struct Node {
@@ -13,7 +14,8 @@ typedef struct Node {
 		tInt tInt;
     } value;
 
-	struct Node** children;
+	struct Node* children;
+    struct Node* nextChild;
 } Node;
 
 #define nodeNone (node) ((node).type == NODE_TYPE_NONE)
@@ -32,3 +34,4 @@ typedef struct Scope {
 
 void setScope();
 Node* createNode();
+size_t freeNode(Node* node);
