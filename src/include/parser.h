@@ -28,3 +28,4 @@ void appendToken(Token** dest, Token src);
 size_t freeTokens(Token* tokens);
 void printTokens(Token* tokens);
 void printArray(char** array);
+void printNode(Node* node);

@@ -29,6 +29,12 @@ void printArray(char** array) {
     putchar('\n');
 }
 
+// TODO: complete intended functionality
+void printNode(Node* node) {
+    if (!node) { return; }
+    printf("Node: \n  Type: %d\n  tInt Value: %d\n", node->type, node->value.tInt);
+}
+
 size_t freeTokens(Token* tokens) {
     size_t count = 0;
     while (tokens) {
@@ -135,7 +141,7 @@ Error lex(char* src, Token* token) {
 }
 
 Error parseExpression(char* src, Node* result) {
-    char* alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char* validNameChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
     Error err = ok;
 
     Token* tokens = NULL;
@@ -150,28 +156,36 @@ Error parseExpression(char* src, Node* result) {
 
     // printTokens(tokens);
     Node* rootNode = createNode();
-    Token* tokenIt = tokens;
     char** tokenArray = toTokenArray(tokens);
 
-    while(tokenIt) {
-        char* tokenContent = getTokenContent(tokenIt);
-        char* nextTokenContent;
-        if (tokenIt->next)
-            nextTokenContent = getTokenContent(tokenIt->next);
+    for (int i = 0; i < tokenCount; i++) {
+        char* currentToken = tokenArray[i];
+        char* nextToken = NULL; if (i != tokenCount -1) nextToken = tokenArray[i + 1];
+        char* previousToken = NULL; if (i != 0) previousToken = tokenArray[i - 1];
+        Node currentNode;
+        currentNode.type = NODE_TYPE_NONE;
+        currentNode.value.tInt = 0;
 
-        if (strcmp(":", tokenContent) == 0) {  
-            if (nextTokenContent && strcmp("int", nextTokenContent) == 0) {
-                printf("Found int declaration\n");
+        if (strcmp(":", currentToken) == 0) {  
+            if (nextToken && strcmp("int", nextToken) == 0) {
+                if (previousToken && consistsOf(previousToken, validNameChars)) {
+                    //printf("Found int declaration: %s:int\n", previousToken);
+                    currentNode.type = NODE_TYPE_INT;
+                }
             }
         }
 
-        if (strcmp("=", tokenContent) == 0) {  
-            if (nextTokenContent && consistsOf(nextTokenContent, "0123456789")) {
-                printf("Found int assignment: %s\n", nextTokenContent);
+        if (strcmp("=", currentToken) == 0) {
+            if (nextToken && consistsOf(nextToken, "0123456789")) {
+                if (previousToken && consistsOf(previousToken, validNameChars)) {
+                    //printf("Found int assignment: %s->%s\n", nextToken, previousToken);
+                    currentNode.type = NODE_TYPE_INT;
+                    currentNode.value.tInt = atoi(nextToken);
+                }
             }
         }
 
-        tokenIt = tokenIt->next;
+        if (currentNode.type != NODE_TYPE_NONE ) printNode(&currentNode);
     }
 
     printf("Freed %lu tokens\n", freeTokens(tokens));
