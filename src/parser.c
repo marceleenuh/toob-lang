@@ -75,9 +75,8 @@ char** toTokenArray(Token* tokens) {
 
 size_t arrayLength(char** array) {
     size_t length = 0;
-    char** arrayIt = array;
     char* c = "";
-    while (*(c) != '\0') {
+    while (c != '\0') {
         c = array[length];
         length++;
     }
@@ -141,18 +140,18 @@ Error parseExpression(char* src, Node* result) {
 
     Token* tokens = NULL;
     Token currentToken = createLexableToken(src);
+    size_t tokenCount = 0;
 
     while ((err = lex(currentToken.end, &currentToken)).type == ERROR_NONE) {
         if (currentToken.end - currentToken.beginning == 0) { break; }
         appendToken(&tokens, currentToken);
+        tokenCount++;
     }
 
     // printTokens(tokens);
     Node* rootNode = createNode();
     Token* tokenIt = tokens;
     char** tokenArray = toTokenArray(tokens);
-    size_t tokenCount = arrayLength(tokenArray);
-    // printArray(tokenArray);
 
     while(tokenIt) {
         char* tokenContent = getTokenContent(tokenIt);
