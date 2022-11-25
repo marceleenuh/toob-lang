@@ -22,6 +22,7 @@ Token* createToken();
 Token createLexableToken(char* src);
 bool consistsOf(char* str, char* accept);
 char** toTokenArray(Token* tokens);
+size_t arrayLength(char** array);
 char* getTokenContent(Token* token);
 void appendToken(Token** dest, Token src);
 size_t freeTokens(Token* tokens);

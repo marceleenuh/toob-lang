@@ -17,14 +17,7 @@ void printTokens(Token* tokens) {
 }
 
 void printArray(char** array) {
-    size_t length = 0;
-    char** arrayIt = array;
-    char* c = "";
-    while (*(c) != '\0') {
-        c = array[length];
-        length++;
-    }
-    length -= 1;
+    size_t length = arrayLength(array);
 
     putchar('{');
     for (int i = 0; i < length; i++) {
@@ -78,6 +71,17 @@ char** toTokenArray(Token* tokens) {
     }
     tokenArray[count] = '\0';
     return tokenArray;
+}
+
+size_t arrayLength(char** array) {
+    size_t length = 0;
+    char** arrayIt = array;
+    char* c = "";
+    while (*(c) != '\0') {
+        c = array[length];
+        length++;
+    }
+    return length-1;
 }
 
 char* getTokenContent(Token* token) {
@@ -147,6 +151,7 @@ Error parseExpression(char* src, Node* result) {
     Node* rootNode = createNode();
     Token* tokenIt = tokens;
     char** tokenArray = toTokenArray(tokens);
+    size_t tokenCount = arrayLength(tokenArray);
     // printArray(tokenArray);
 
     while(tokenIt) {
