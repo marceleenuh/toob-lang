@@ -160,7 +160,7 @@ Error parseExpression(char* src, Node* result) {
 
     for (int i = 0; i < tokenCount; i++) {
         char* currentToken = tokenArray[i];
-        char* nextToken = NULL; if (i != tokenCount -1) nextToken = tokenArray[i + 1];
+        char* nextToken = NULL; if (i != tokenCount - 1) nextToken = tokenArray[i + 1];
         char* previousToken = NULL; if (i != 0) previousToken = tokenArray[i - 1];
         Node currentNode;
         currentNode.type = NODE_TYPE_NONE;
@@ -169,16 +169,19 @@ Error parseExpression(char* src, Node* result) {
         if (strcmp(":", currentToken) == 0) {  
             if (nextToken && strcmp("int", nextToken) == 0) {
                 if (previousToken && consistsOf(previousToken, validNameChars)) {
-                    //printf("Found int declaration: %s:int\n", previousToken);
                     currentNode.type = NODE_TYPE_INT;
+                }
+                if (i != tokenCount - 2 && strcmp("=", tokenArray[i + 2]) == 0) {
+                    if (i != tokenCount - 3 && consistsOf(tokenArray[i + 3], "0123456789")) {
+                        currentNode.value.tInt = atoi(tokenArray[i + 3]);
+                    }
                 }
             }
         }
 
         if (strcmp("=", currentToken) == 0) {
             if (nextToken && consistsOf(nextToken, "0123456789")) {
-                if (previousToken && consistsOf(previousToken, validNameChars)) {
-                    //printf("Found int assignment: %s->%s\n", nextToken, previousToken);
+                if (previousToken && consistsOf(previousToken, validNameChars) && strcmp("int", previousToken) != 0) {
                     currentNode.type = NODE_TYPE_INT;
                     currentNode.value.tInt = atoi(nextToken);
                 }
