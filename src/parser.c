@@ -26,13 +26,13 @@ void printArray(char** array) {
             break;
         } else { printf(" '%s',", array[i]); }
     }
-    putchar('\n');
+    putchar('\n');  
 }
 
 // TODO: complete intended functionality
 void printNode(Node* node) {
     if (!node) { return; }
-    printf("Node: \n  Type: %d\n  tInt Value: %d\n", node->type, node->value.tInt);
+    printf("Node: \n  Type: %d\n  tInt Value: %d\n  UUID: %s\n", node->type, node->value.tInt, node->UUID);
 }
 
 size_t freeTokens(Token* tokens) {
@@ -157,6 +157,7 @@ Error parseExpression(char* src, Node* result) {
     // printTokens(tokens);
     Node* rootNode = createNode();
     char** tokenArray = toTokenArray(tokens);
+    rootNode->children = calloc(arrayLength(tokenArray), sizeof(Node));
 
     for (int i = 0; i < tokenCount; i++) {
         char* currentToken = tokenArray[i];
@@ -165,6 +166,7 @@ Error parseExpression(char* src, Node* result) {
         Node currentNode;
         currentNode.type = NODE_TYPE_NONE;
         currentNode.value.tInt = 0;
+        currentNode.UUID = s_generateUUID((uint32_t)i);
 
         if (strcmp(":", currentToken) == 0) {  
             if (nextToken && strcmp("int", nextToken) == 0) {
@@ -188,7 +190,10 @@ Error parseExpression(char* src, Node* result) {
             }
         }
 
-        if (currentNode.type != NODE_TYPE_NONE ) printNode(&currentNode);
+        if (currentNode.type != NODE_TYPE_NONE && currentNode.value.tInt != 0) {
+            printNode(&currentNode);
+            rootNode->children[i] = currentNode;
+        }
     }
 
     printf("Freed %lu tokens\n", freeTokens(tokens));

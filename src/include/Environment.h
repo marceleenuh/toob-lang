@@ -1,5 +1,6 @@
 #pragma once
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <assert.h>
 
@@ -13,7 +14,7 @@ typedef struct Node {
     union NodeValue {
 		tInt tInt;
     } value;
-
+    char* UUID;
 	struct Node* children;
     struct Node* nextChild;
 } Node;
@@ -35,3 +36,5 @@ typedef struct Scope {
 void setScope();
 Node* createNode();
 size_t freeNode(Node* node);
+char* generateUUID();
+char* s_generateUUID(uint32_t seed);

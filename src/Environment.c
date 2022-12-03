@@ -1,4 +1,4 @@
-#include "Environment.h"
+#include "environment.h"
 
 Node* createNode() {
     Node* node = calloc(1, sizeof(Node));
@@ -21,4 +21,41 @@ size_t freeNode(Node* node) {
 
     free(node);
     return count;
+}
+
+char* generateUUID() {
+    char v[] = "0123456789abcdef";
+    static char buf[37] = {0};
+
+    for(int i = 0; i < 36; ++i) {
+        buf[i] = v[rand()%16];
+    }
+
+    buf[8] = '-';
+    buf[13] = '-';
+    buf[18] = '-';
+    buf[23] = '-';
+
+    buf[36] = '\0';
+
+    return buf;
+}
+
+char* s_generateUUID(uint32_t seed) {
+    char v[] = "0123456789abcdef";
+    static char buf[37] = {0};
+
+    for(int i = 0; i < 36; i++) {
+        srand(seed+i);
+        buf[i] = v[rand()%16];
+    }
+
+    buf[8] = '-';
+    buf[13] = '-';
+    buf[18] = '-';
+    buf[23] = '-';
+
+    buf[36] = '\0';
+
+    return buf;
 }

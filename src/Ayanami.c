@@ -1,7 +1,7 @@
 #include "parser.h"
 #include "error.h"
 #include "fileIO.h"
-#include "Environment.h"
+#include "environment.h"
 
 #include <stdio.h>
 #include <stdlib.h>
