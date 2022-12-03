@@ -1,4 +1,4 @@
-#include "environment.h"
+#include "Environment.h"
 
 Node* createNode() {
     Node* node = calloc(1, sizeof(Node));
