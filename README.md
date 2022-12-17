@@ -5,6 +5,7 @@
 
 ### Notes
 Pronounced as [Too-Bee (2B)] or [Toob]
+TooB is only a project to explore how a compiler works, not meant to be use as a programming language / not turing-complete
 
 ### How to Build
 1. Create a build directory in the repo folder. `$ mkdir build`

@@ -196,6 +196,7 @@ Error parseExpression(char* src, Node* result) {
         }
     }
 
+    result = rootNode;
     printf("Freed %lu tokens\n", freeTokens(tokens));
     printf("Freed %lu nodes\n", freeNode(rootNode));
     return err;
