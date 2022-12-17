@@ -4,7 +4,7 @@
 </div>
 
 ### Notes
-Pronounced as [Too-Bee (2B)] or [Toob]
+Pronounced as [Too-Bee (2B)] or [Toob]  
 TooB is only a project to explore how a compiler works, not meant to be use as a programming language / not turing-complete
 
 ### How to Build
